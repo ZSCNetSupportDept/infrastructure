@@ -1,7 +1,0 @@
-##
-# WebSocket Header Mapping
-##
-map $http_upgrade $connection_upgrade {
-    default upgrade;
-    '' close;
-}
