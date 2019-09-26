@@ -1,0 +1,21 @@
+version: '3'
+services:
+  wikidb:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data/mongo:/data/db
+  wikijs:
+    image: requarks/wiki:latest
+    restart: always
+    depends_on:
+      - wikidb
+    ports:
+      - 3000:3000
+    environment:
+      WIKI_ADMIN_EMAIL: dev@sola.love
+    volumes:
+      - ./config.yml:/var/wiki/config.yml
+      - ./data/data:/var/wiki/data
+      - ./data/repo:/var/wiki/repo
+      - ../git.key:/etc/wiki/keys/git.pem
